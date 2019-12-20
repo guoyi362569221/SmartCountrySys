@@ -1,0 +1,18 @@
+{
+  "layout": {
+    "model": "left",
+    "headerHeight": 60,
+    "footerHeight": 0,
+    "tagsView": false,
+    "rightPanel": {
+      "width": 288,
+      "toggle": true
+    },
+    "themeColor": "#303643"
+  },
+  "prjInfo": {
+    "webApi": {
+      "url": "/webapi"
+    }
+  }
+}

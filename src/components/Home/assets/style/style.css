@@ -1,0 +1,175 @@
+.HomePageMonitor .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+    color: #fff;
+    background-color: #3894f6;
+}
+
+.HomePageMonitor .el-radio-button__inner {
+    background: #f4f7f9;
+    border: none;
+    color: #000;
+}
+
+.HomePageMonitor .el-radio-group {
+    border: 1px solid #3894f6;
+}
+
+.HomePageMonitor .el-radio-button:first-child .el-radio-button__inner {
+    border-radius: 0;
+}
+
+.HomePageMonitor .el-radio-button:last-child .el-radio-button__inner {
+    border-radius: 0;
+}
+
+.HomePageMonitor .el-table {
+    color: #000 !important;
+    background-color: transparent;
+}
+
+.HomePageMonitor .el-table thead {
+    color: #389ff7 !important;
+}
+/*Element UI 更新后的样式修改*/
+.HomePageMonitor .el-table th,.HomePageMonitor .el-table tr{
+    font-size: 13px;
+    background-color: transparent !important;
+}
+.HomePageMonitor .el-table .el-table__empty-block{
+    display: none;
+}
+.HomePageMonitor .el-scrollbar__wrap{
+    overflow-x: hidden;
+}
+/*.HomePageMonitor .el-table tr {
+    background-color: transparent;
+}
+*/
+/*.HomePageMonitor .el-table td,.HomePageMonitor .el-table th.is-leaf {
+    border-bottom: none;
+}
+*/
+/**单行浮动时的样式只能在这里修改**/
+.HomePageMonitor .el-table--enable-row-hover .el-table__body tr:hover > td {
+    background: transparent !important;
+    background-clip: padding-box;
+    /*color: #fff;*/
+}
+.HomePageMonitor .el-table__row:hover {
+    /*color: #4f5664 !important;*/
+    /*background-color: rgba(255,255,255, 0.2) !important;*/
+}
+
+.HomePageMonitor .leaflet-top.leaflet-left {
+    top: 50px !important;
+    right: 6px !important;
+    left: inherit !important;
+}
+
+.HomePageMonitor .el-table--small td,.HomePageMonitor .el-table--small th {
+    padding: 6px 0;
+}
+
+.HomePageMonitor .el-radio-button:first-child .el-radio-button__inner {
+    border-left: none;
+}
+
+.HomePageMonitor .el-table--border::after,.HomePageMonitor .el-table--group::after,.HomePageMonitor .el-table::before {
+    background-color: transparent;
+}
+.HomePageMonitor .td.el-table__expanded-cell:hover {
+    background-color: transparent !important;
+}
+/*对污染物选择菜单的样式修改*/
+/*解决上下标对行高的扰乱*/
+.HomePageMonitor sub,.HomePageMonitor sup { 
+    line-height: 0; 
+    position: relative;  
+    vertical-align: baseline;
+}
+.HomePageMonitor .right-panel .form-content-wrap{
+    height: 100% !important;
+}
+/*地图popup的样式*/
+.HomePageMonitor .leaflet-popup-content-wrapper{
+    padding: 0px !important;
+}
+.HomePageMonitor .leaflet-popup-content{
+    margin:0 !important;
+}
+.HomePageMonitor .leaflet-container a.leaflet-popup-close-button{
+    color: #fff !important;
+}
+
+.leaflet-popup-content-wrapper{
+    border-radius:0px !important;
+}
+
+.leaflet-popup-content{
+    width: auto !important;
+}
+
+.HomePageMonitor .popuCustomerPanel{
+    width: 300px; 
+    height: 200px;
+}
+
+.HomePageMonitor .popuCustomerPanelTitle{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    background-color: rgb(49, 126, 236);
+    color: #fff;
+
+    text-align: left;
+    text-indent: 5px;
+}
+
+.HomePageMonitor .popuCustomerPanelContent{
+    width: 290px;
+    height: calc(175px - 10px);
+    background-color: #fff;
+    padding: 5px 5px;
+}
+
+.hpManage_Content .el-tabs__item{
+    padding: 0 8px !important;
+    
+}
+
+.HomePageMonitor .el-switch__core {
+    height: 14px;
+}
+
+.HomePageMonitor .el-switch__button{
+    height: 10px;
+    width: 6px;
+}
+
+
+.HomePageMonitor .insarPopuCustomerPanel{
+    width: 400px; 
+    height: 240px;
+}
+
+.HomePageMonitor .insarPopuCustomerPanelTitle{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    background-color: rgb(49, 126, 236);
+    color: #fff;
+
+    text-align: left;
+    text-indent: 5px;
+}
+
+.HomePageMonitor .insarPopuCustomerPanelContent{
+    width: 390px;
+    height: calc(215px - 10px);
+    background-color: #fff;
+    padding: 5px 5px;
+}
+
+
+.hpManage_Content .el-button--mini, .el-button--mini.is-round{
+    padding: 4px 15px!important;
+}

@@ -1,0 +1,8 @@
+
+.sw .el-switch__core {
+    border-radius: 10px;
+}
+
+.sw .el-switch__core .el-switch__button {
+    border-radius: 100%;
+}

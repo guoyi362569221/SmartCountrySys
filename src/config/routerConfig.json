@@ -1,0 +1,68 @@
+[
+  {
+    "path": "/",
+    "name": "登录",
+    "hidden": true,
+    "component": "Login"
+  },
+  {
+    "path": "/login",
+    "name": "登录",
+    "hidden": true,
+    "component": "Login"
+  },
+  {
+    "path": "/home",
+    "name": "首页",
+    "component": "Body",
+    "redirect": "/home/",
+    "icon": "icon-3clear-home",
+    "children": [
+      {
+        "isFullPage": true,
+        "path": "/",
+        "name": "首页",
+        "icon": "",
+        "component": "Home"
+      }
+    ]
+  },
+  {
+    "path": "/mng",
+    "name": "用户管理",
+    "icon": "icon-3clear-menu",
+    "component": "Home",
+    "redirect": "/mng/role",
+    "children": [
+      {
+        "path": "org",
+        "name": "组织机构管理",
+        "icon": "fa fa-user-secret",
+        "component": "Org"
+      },
+      {
+        "path": "role",
+        "name": "角色管理",
+        "icon": "fa fa-user-secret",
+        "component": "List"
+      },
+      {
+        "path": "user",
+        "name": "用户管理",
+        "icon": "fa fa-users",
+        "component": "userList"
+      },
+      {
+        "path": "edit",
+        "name": "用户设置",
+        "icon": "fa fa-vcard",
+        "component": "Edit"
+      }
+    ]
+  },
+  {
+    "path": "*",
+    "hidden": true,
+    "component": "NotFound"
+  }
+]

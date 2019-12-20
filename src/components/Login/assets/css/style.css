@@ -1,0 +1,43 @@
+#loginFrom .el-input--small .el-input__inner{
+	height: 45px !important;
+	color: #fff !important;
+	
+}
+#loginFrom .el-form-item.is-error .el-input__inner,#loginFrom .el-form-item.is-error .el-input__inner:focus,
+#loginFrom .el-form-item.is-error .el-textarea__inner
+,#loginFrom .el-form-item.is-error .el-textarea__inner:focus,
+#loginFrom .el-message-box__input input.invalid,
+ #loginFrom .el-message-box__input input.invalid:focus{
+  	border: none;
+  }
+#loginFrom .el-input__inner{
+	border: none !important;
+	background-color: rgba(255,255,255,0.2);
+}
+#loginFrom .el-input__prefix, .el-input__suffix{
+	color: #fff;
+	font-size: 15px;
+}
+#loginFrom .el-input{
+	margin-right:-2px !important;
+	width: 260px;
+}
+ #loginFrom input:-webkit-autofill,
+ #loginFrom input:-webkit-autofill:hover,
+ #loginFrom input:-webkit-autofill:focus {
+box-shadow:0 0 0 60px #FFFFFF inset;
+-webkit-text-fill-color:rgba(0, 0, 0,1) !important;
+background-color: rgb(0, 0, 0);
+opacity: 0.3;
+font-weight: 700;
+}
+ #loginFrom .el-button.el-button--primary.el-button--small{
+	height: 46px !important;
+	width: 45px;
+	font-size: 14px !important;
+	background-color:rgba(255,255,255,0.3);
+	border-color: rgba(255,255,255,0.3);
+	border: none;
+	color: rgba(58,57,59,0.7);
+}
+

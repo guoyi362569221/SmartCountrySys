@@ -1,0 +1,30 @@
+.basemaps {
+    margin-top: 3px !important;
+}
+.basemaps.closed .basemap {
+    display: none;
+}
+.basemaps.closed .basemap.alt {
+    display: inline-block;
+}
+.basemaps.closed .basemap.alt h4 {
+    display: none;
+}
+
+.basemap {
+    display: inline-block; /* todo: flexbox? */
+    cursor: pointer;
+    /*margin-left: -2px;*/
+
+}
+.basemap.active img {
+    border-color: orange;
+    box-shadow: 2px 2px 4px #000;
+}
+.basemap img {
+    width: 24px;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin: 0 2px 0 0;
+    border-radius: 4px;
+    /* box-shadow: 0 1px 5px rgba(0,0,0,0.65); */
+}

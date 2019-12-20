@@ -1,0 +1,13 @@
+
+.el-switch__core {
+    border-radius: 0;
+    /*height: 26px;*/
+    /*width:52px;*/
+}
+
+.el-switch__core .el-switch__button {
+    /*height: 22px;*/
+    /*width:22px;*/
+    border-radius: 0;
+}
+

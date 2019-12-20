@@ -1,0 +1,172 @@
+
+.el-menu, .el-menu--horizontal, .el-menu--horizontal .el-submenu > .el-menu {
+    background-color: #303643
+}
+
+.el-menu--horizontal {
+    border-right: none;
+    border-bottom: none;
+    vertical-align: top;
+}
+
+.el-menu--horizontal .el-submenu .el-menu-item {
+    min-width: unset;
+}
+
+.el-menu--horizontal .el-menu-item.is-active {
+    border-left: none !important;
+}
+
+.el-menu--horizontal .el-submenu__title {
+    margin-top: 0 !important;
+}
+
+/**一级菜单默认字体颜色**/
+.el-menu--horizontal .el-menu-item {
+    border-bottom: none;
+    color: #cecece;
+    border-left: none;
+}
+
+.el-menu--horizontal .el-submenu .el-submenu__title {
+    color: #cecece
+}
+
+/**一级菜单选中颜色**/
+.el-menu--horizontal > .el-menu-item.is-active, .el-menu--horizontal > .el-submenu.is-active .el-submenu__title {
+    background-color: RGBA(255, 255, 255, 0.15);
+    color: #fff !important;
+    border-bottom: none;
+}
+
+.el-menu, .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover, .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+    background-color: RGBA(255, 255, 255, 0.15);
+}
+
+/**一级菜单鼠标移过颜色**/
+.el-menu--horizontal > .el-menu-item:hover, .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+    background-color: RGBA(255, 255, 255, 0.15);
+    color: #fff !important;
+}
+
+/**一级菜单向下箭头选中色**/
+.el-menu--horizontal > .el-submenu.is-active .el-submenu__title > .el-submenu__icon-arrow {
+    color: #fff;
+}
+
+/**二级下拉菜单**/
+
+
+.el-menu--horizontal .el-menu .el-menu-item{
+    background-color: #2b333b !important;
+    color: #cecece;
+}
+
+.el-menu--horizontal .el-menu .el-menu-item:hover{
+    background-color: RGBA(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+
+.el-menu--horizontal .el-menu .el-menu-item.is-active {
+    color: #fff !important;
+    background-color: RGBA(255, 255, 255, 0.15) !important;
+}
+
+.el-menu--horizontal .el-menu-item, .el-menu--horizontal .el-submenu__title {
+    padding: 0 8px !important;
+}
+
+/**左侧菜单**/
+
+.el-menu {
+    border-right: none;
+    background-color: #2b333b;
+}
+
+.el-menu-item {
+    color: #cecece;
+    margin-top: 6px;
+    border-left: 4px solid transparent;
+    padding-left: 26px !important;
+}
+
+.el-menu-item.is-active {
+    color: #fff;
+    border-left: 4px solid #02b3f7;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.el-menu-item:focus, .el-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+.el-menu-item:first-child {
+    margin-top: 0
+}
+
+.el-menu-item, .el-submenu__title {
+    height: 41px;
+    line-height: 41px;
+    padding: 0 10px;
+}
+
+.el-menu-item i {
+    color: #cecece
+}
+
+.el-submenu .el-menu-item {
+    height: 36px;
+    line-height: 36px;
+}
+
+.el-submenu__title {
+    color: #cecece;
+}
+
+.el-submenu__title * {
+    vertical-align: middle
+}
+
+.el-submenu__title i {
+    color: #cecece
+}
+
+.el-submenu__title:hover {
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+.el-submenu .el-menu {
+    border: none
+}
+
+.el-submenu__title {
+    padding-left: 30px !important;
+    margin-top: 8px;
+}
+
+.el-submenu.is-opened .el-menu-item {
+    margin-top: 8px !important;
+    padding-left: 35px !important;
+}
+
+/**左侧收起来样式**/
+
+.el-menu--collapse {
+    width: 44px
+}
+
+.el-menu--collapse > .el-menu-item .el-tooltip {
+    padding: 0 12px !important;
+}
+
+.el-menu--collapse .el-submenu__title {
+    padding-left: 16px !important;
+}
+
+.el-menu--collapse .el-submenu.is-active {
+    border-left: 4px solid #02b3f7;
+}
+
+
+
