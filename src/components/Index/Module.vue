@@ -10,6 +10,22 @@
                         <locate-btn :locations="location" v-model="locate" @change="onLocationChange"></locate-btn>
                     </div>
 
+                    <div class="calculateDistance">
+                        <el-button type="primary" 
+                          icon="el-icon-edit" 
+                          size="mini" 
+                          @click="onCJLChange">
+                          测距
+                        </el-button>
+                        <el-button 
+                          type="danger" 
+                          icon="el-icon-delete" 
+                          size="mini"
+                          @click="onQCJLChange">
+                          清除
+                        </el-button>
+                    </div>
+
                     <div class="leftPanel">
 
                         <div class="layerManageICOBtn" v-show="!tcglShow" title="图层管理" @click="onCloseTC">
@@ -241,6 +257,13 @@
         right: 4px;
         top: 4px;
         z-index: 600;        
+    }
+
+    .HomePageMonitor .calculateDistance{
+        position: absolute;
+        right: 4px;
+        top: 135px;
+        z-index: 600;    
     }
    
     .HomePageMonitor .condition-wrap{

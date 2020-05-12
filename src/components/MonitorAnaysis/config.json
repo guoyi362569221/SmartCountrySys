@@ -1,0 +1,299 @@
+{
+  "name": "MonitorAnaysis",
+  "treeCheckedNodes": ["swj","dzcxy","hpwyj"],
+  "treeObjects":[
+    {
+        "id": "swj",
+        "label": "水位计",
+        "children":[
+            {
+                "id": "28BAC5A50800002B",
+                "label": "水位计(ZK5-1.5M)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                    "type":"dxsw",
+                    "initValue":81.4,
+                    "height":1.5
+                }
+            },
+            {
+                "id": "28154FA508000025",
+                "label": "水位计(ZK4-2M)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                  "type":"dxsw",
+                  "initValue":81.4,
+                  "height":2
+                }
+            },
+            {
+                "id": "283DEC450B0000E2",
+                "label": "水位计(ZK3-14M-N)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                    "type":"dxsw",
+                    "initValue":81.4,
+                    "height":14
+                }
+            },
+            {
+                "id": "286BC1890A0000EA",
+                "label": "水位计(ZK3-16M)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                    "type":"dxsw",
+                    "initValue":81.4,
+                    "height":16
+                }
+            },
+            {
+                "id": "288274A60800006D",
+                "label": "水位计(ZK2-18M)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                    "type":"dxsw",
+                    "initValue":81.4,
+                    "height":18
+                }
+            },
+            {
+                "id": "28F762A508000076",
+                "label": "水位计(ZK1-20M)",
+                "unit":"Kpa",
+                "calc":true,
+                "calcObj":{
+                    "type":"dxsw",
+                    "initValue":81.4,
+                    "height":20
+                }
+            }
+        ]
+    },
+    {
+        "id": "dzcxy",
+        "label": "电子测斜仪",
+        "children":[
+            {
+                "id": "28F9DD68080000E1",
+                "label": "电子测斜仪(ZK1-S-13M)",
+                "unit":"无量纲",
+                "calc":true,
+                "calcObj":{
+                    "type":"cxy",
+                    "initValue":-2.91,
+                    "height":10000
+                },
+                "calcSL":true
+            },
+            {
+                "id": "28AB966808000038",
+                "label": "电子测斜仪(ZK1-S-16M)",
+                "unit":"无量纲",
+                "calc":true,
+                "calcObj":{
+                    "type":"cxy",
+                    "initValue":-1.04,
+                    "height":7000
+                },
+                "calcSL":true
+            },
+            {
+                "id": "283E2368080000FF",
+                "label": "电子测斜仪(ZK1-S-19M)",
+                "unit":"无量纲",
+                "calc":true,
+                "calcObj":{
+                    "type":"cxy",
+                    "initValue":-1.96,
+                    "height":4000
+                },
+                "calcSL":true
+            }
+        ]
+    },
+    {
+        "id": "hpwyj",
+        "label": "滑坡位移计",
+        "children":[
+            {
+                "id": "28E836FB090000E5",
+                "label": "滑坡位移计(HP01)",
+                "unit":"mm"
+            }
+        ]
+    },
+    {
+        "id": "ylj",
+        "label": "雨量计",
+        "children":[
+            {
+                "id": "28F49100B4040087",
+                "label": "雨量计01",
+                "unit":"mm",
+                "queryType":"MonitorYLSJDataQuery"
+            }
+        ]
+    },
+    {
+        "id": "trwsd_W-TJ7",
+        "label": "土壤温湿度(W-TJ7)",
+        "children":[
+            {
+                "id": "288E19770A00002C",
+                "label": "土壤温湿度(W-TJ7-0.8m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "28B2E2B70A000053",
+                "label": "土壤温湿度(W-TJ7-0.5m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "287FDE780A000080",
+                "label": "土壤温湿度(W-TJ7-1.1m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "2803E6B80A0000E6",
+                "label": "土壤温湿度(W-TJ7-0.1m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "28B218770A000071",
+                "label": "土壤温湿度(W-TJ7-0.3m)",
+                "unit":"%",
+                "ico":"ylz"
+            }
+        ]
+    },
+    {
+        "id": "jgcjy",
+        "label": "激光测距仪",
+        "children":[
+            {
+                "id": "28F47206FE0400D7",
+                "label": "激光测距仪(JGCJY)",
+                "unit":"mm",
+                "ico":"ylz"
+            }
+        ]
+    },
+    {
+        "id": "trwsd_W-TJ6",
+        "label": "土壤温湿度(W-TJ6)",
+        "children":[
+            {
+                "id": "28155DB70A0000AA",
+                "label": "土壤温湿度(W-TJ6-0.8m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "28B01BB80A0000F2",
+                "label": "土壤温湿度(W-TJ6-0.35m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "28B7C5B70A000011",
+                "label": "土壤温湿度(W-TJ6-0.1m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "2853CEB70A000094",
+                "label": "土壤温湿度(W-TJ6-1.1m)",
+                "unit":"%",
+                "ico":"ylz"
+            },
+            {
+                "id": "287FCAB70A000040",
+                "label": "土壤温湿度(W-TJ6-0.5m)",
+                "unit":"%",
+                "ico":"ylz"
+            }
+        ]
+    },
+    {
+        "id": "dsj",
+        "label": "冻胀计",
+        "children":[
+            {
+                "id": "286CDF890A0000B1",
+                "label": "冻胀计(DZ-TJ6-0.7m)",
+                "unit":"mm",
+                "ico":"ylz"
+            }
+        ]
+    },
+    {
+        "id": "tylj",
+        "label": "土压力计(TJ6)",
+        "children":[
+            {
+                "id": "2882C3B60A000407",
+                "label": "土压力(TJ6-1.1m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000406",
+                "label": "土压力(TJ6-0.5m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000403",
+                "label": "土压力(TJ6-0.8m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000402",
+                "label": "土压力(TJ6-0.3m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            }
+        ]
+    },
+    {
+        "id": "tylj",
+        "label": "土压力计(TJ7)",
+        "children":[
+            {
+                "id": "2882C3B60A000408",
+                "label": "土压力(TJ7-0.8m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000405",
+                "label": "土压力(TJ7-1.1m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000404",
+                "label": "土压力(TJ7-0.3m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            },
+            {
+                "id": "2882C3B60A000401",
+                "label": "土压力(TJ7-0.5m)",
+                "unit":"Kpa",
+                "ico":"ylz"
+            }
+        ]
+    }
+  ]
+}

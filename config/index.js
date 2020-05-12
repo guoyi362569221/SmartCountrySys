@@ -29,7 +29,7 @@ module.exports = {
 		assetsPublicPath  : '/',
 		proxyTable        : {
 			'/webapi'  : {
-				target      : 'http://192.168.3.121/WebAPI/',//'http://110.88.209.167:84/WebAPI_qz/'
+				target      : 'http://39.98.108.23/WebAPI_Disaster/',//'http://110.88.209.167:84/WebAPI_qz/'
 				changeOrigin: true,
 				pathRewrite : {
 					'^/webapi': ''

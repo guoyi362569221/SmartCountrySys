@@ -22,6 +22,8 @@ import Leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'libs/Leaflet-ext/BaseMapSwitch/L.Control.Basemaps.css';
 
+import $ from 'jquery';
+
 export default {
     components: {
         'right-panel': rightPanel,
@@ -30,7 +32,7 @@ export default {
     data() {
         return {
             ////模块基础数据信息
-            name: 'Home',
+            name: 'Index',
             toggleStatus: 'open',
             padding: 8,
             marginWidth:0,
@@ -109,7 +111,17 @@ export default {
             nodeData:null,
 
             tableData: [{L:"-",Q1:"-",Q2:"-",L1:"-",L2:"-",N:"-",p:"-"}],
-            isShowExportBtn:false
+            isShowExportBtn:false,
+
+            calculateDistancePoints:[],
+            calculateDistanceLines:new L.polyline([]),
+            calculateDistanceTempLines:new L.polyline([],{dashArray:5}),
+            calculateDistanceLinesLayer:new L.LayerGroup(),
+            calculateDistanceTempLinesLayer:new L.LayerGroup(),
+            distanceValue:0,
+            calculateDistancePopup:null,
+
+            markInfos:[],
         }
     },
 
@@ -130,7 +142,6 @@ export default {
             this.config = config;
             this.isConfigLoaded = true;
             ////////////////////////////////////
-           
             this.defaultMapType = config.settings.mapType.default;
 
             this.location = config.localInfoObj.location;
@@ -313,7 +324,7 @@ export default {
 
             this.tableData = [{L:"-",Q1:"-",Q2:"-",L1:"-",L2:"-",N:"-",p:"-"}];
             this.isShowExportBtn = false;
-            this.points=[]
+            this.points = [];
             this.lines = new L.polyline([]);
             this.tempLines = new L.polyline([],{dashArray:5});
 
@@ -321,6 +332,7 @@ export default {
             this.tempLinesLayer.clearLayers();
             this.pointsLayer.clearLayers();
             this.ycPointsLayer.clearLayers();
+
         },
 
         /*
@@ -478,6 +490,46 @@ export default {
                 }
             };
             utils.toExcel(toExcelObj);
+        },
+
+        onCJLChange(){
+            let that = this;
+
+            if(this.map){
+                this.map.off('mousedown');
+                this.map.off('mouseup');
+            }
+
+            this.calculateDistancePoints = [];
+            this.distanceValue = 0;
+
+            this.calculateDistanceLines = new L.polyline([]);
+            this.calculateDistanceTempLines = new L.polyline([],{dashArray:5});
+            this.calculateDistanceLinesLayer.clearLayers();
+            this.calculateDistanceTempLinesLayer.clearLayers();
+
+            this.map.on('click', this.onCJLClick);    //点击地图
+            this.map.on('mousemove',this.onCJLMove);
+            this.map.on('dblclick',this.onStopCJLDbClick);
+        },
+
+        onQCJLChange(){
+            let that = this;
+
+            this.calculateDistancePoints=[];
+            this.distanceValue = 0;
+
+            this.calculateDistanceLines = new L.polyline([]);
+            this.calculateDistanceTempLines = new L.polyline([],{dashArray:5});
+            this.calculateDistanceLinesLayer.clearLayers();
+            this.calculateDistanceTempLinesLayer.clearLayers();
+
+            if(this.calculateDistancePopup){
+               this.calculateDistancePopup._onCloseButtonClick();
+            }
+            
+
+            this.map.off('dblclick');    //点击地图
         },
 
         /*
@@ -682,33 +734,95 @@ export default {
             
             // this.map.addLayer(dynamicLayer);
 
-            let myIcon = L.icon({
-                iconUrl: require('./assets/images/clz.png'),
-                shadowUrl: require('./assets/images/shadow.png'),
-                iconSize: [18, 25],
-                iconAnchor: [7, 25],
-                popupAnchor: [1, -20],
-                shadowSize: [25, 25]
-            });
-
+            
+            that.markInfos = [];
             var markerLayer = new L.LayerGroup();
             let layer = L.geoJson(this.monitorJCZData, {
                 pointToLayer: function (feature, latlng) {
+                    debugger;
+                    let children = feature.properties.children;
+                    let unit = feature.properties.unit;
                     var name = feature.properties.name;
-                    var number = feature.properties.number;
+
+                    // that.markInfos.push(children);
+                    that.markInfos=that.markInfos.concat(children);
+                    let tabStr = "";
+                    for (let i=0;i<children.length;i++) {
+                        if(i==0){
+                            tabStr+='<div attr-number='+children[i]["number"]+' attr-name='+name+' attr-unit='+unit+' class="popuCustomerPanelTabItem popuCustomerPanelTabItemChecked">'+children[i]["name"]+'</div>';
+                        }else{
+                            tabStr+='<div attr-number='+children[i]["number"]+' attr-name='+name+' attr-unit='+unit+' class="popuCustomerPanelTabItem">'+children[i]["name"]+'</div>';
+                        }
+                        
+                    }
+                    
+                    var ico = feature.properties.ico;
+                    var iconPath = require("./assets/images/clz.png");
+                    if(ico){
+                        iconPath = require("./assets/images/"+ico+".png");
+                    }
+                    let myIcon = L.icon({
+                        iconUrl: iconPath,
+                        shadowUrl: require('./assets/images/shadow.png'),
+                        iconSize: [18, 25],
+                        iconAnchor: [7, 25],
+                        popupAnchor: [1, -20],
+                        shadowSize: [25, 25]
+                    });
                     var marker = L.marker(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {icon: myIcon,title:name});
                     var content =   '<div class="popuCustomerPanel">'+
                                         '<div class="popuCustomerPanelTitle">'+name+'</div>'+
-                                        '<div class="popuCustomerPanelContent" id="marker' + number + '"></div>'+
+                                        '<div class="popuCustomerPanelTab">'+
+                                            tabStr+
+                                        '</div>'+
+                                        '<div class="popuCustomerPanelContent" id="markerPop_Panels'+name+'"></div>'+
                                     '</div>';
                     marker.bindPopup(content, {});
                     marker.on('click', function(e) {
-                      that.markerPopuFun(feature);
+                        setTimeout(()=>{
+                            // this.$nextTick(() => {
+                            //     let name = $(".popuCustomerPanelTabItem").eq(0).attr("attr-name");
+                            //     let unit = $(".popuCustomerPanelTabItem").eq(0).attr("attr-unit");
+                            //     that.markerPopuFun(children[0],name,unit);
+                            // });
+                            let name = $(".popuCustomerPanelTabItem").eq(0).attr("attr-name");
+                            let unit = $(".popuCustomerPanelTabItem").eq(0).attr("attr-unit");
+                            let number = $(".popuCustomerPanelTabItem").eq(0).attr("attr-number");
+
+                            //that.markerPopuFun(children[0],name,unit);
+                            for(let i=0;i<that.markInfos.length;i++){
+                                if(that.markInfos[i]["number"]===number){
+                                   that.markerPopuFun(that.markInfos[i],name,unit); 
+                                   break;
+                                }
+                            }
+                        }, 300); 
+                        
                     })
                     markerLayer.addLayer(marker);
+
+                    
                 }
             });
             this.map.addLayer(markerLayer);
+
+            $("body").on("click",".popuCustomerPanelTabItem",function(){
+                // let obj = $(".popuCustomerPanelTabItem").attr("attr-index");//.attr-index
+                $(".popuCustomerPanelTabItem").removeClass("popuCustomerPanelTabItemChecked");
+                let index = $(".popuCustomerPanelTabItem").index(this);//.attr-index
+                $(".popuCustomerPanelTabItem").eq(index).addClass("popuCustomerPanelTabItemChecked");
+                let name = $(".popuCustomerPanelTabItem").eq(index).attr("attr-name");
+                let unit = $(".popuCustomerPanelTabItem").eq(index).attr("attr-unit");
+                let number = $(".popuCustomerPanelTabItem").eq(index).attr("attr-number");
+
+                for(let i=0;i<that.markInfos.length;i++){
+                    if(that.markInfos[i]["number"]===number){
+                        debugger;
+                       that.markerPopuFun(that.markInfos[i],name,unit); 
+                       break;
+                    }
+                }
+            })
 
             // L.tileLayer("http://localhost:6080/arcgis/rest/services/HFT_DOM/heifangtai_dom/MapServer/tile/{z}/{y}/{x}", {
             //         maxZoom: 19,
@@ -731,16 +845,10 @@ export default {
             //         console.log('Found ' + featureCollection.features.length + ' features');
             //     })
             // });
-
-
-            
-            
-            
-            
-
         },
 
         onClick(e){
+
             this.points.push([e.latlng.lat,e.latlng.lng])
             this.lines.addLatLng(e.latlng)
 
@@ -760,23 +868,85 @@ export default {
         },
 
         onMove(e){
+
            if(this.points.length>0) {
-                let ls =[this.points[this.points.length-1],[e.latlng.lat,e.latlng.lng]]
-                this.tempLines.setLatLngs(ls)
-                this.map.addLayer(this.tempLines)
+                let ls =[this.points[this.points.length-1],[e.latlng.lat,e.latlng.lng]];
+                this.tempLines.setLatLngs(ls);
+                this.map.addLayer(this.tempLines);
             }
         },
 
-        markerPopuFun(feature){
+        onCJLClick(e){
+
+            this.calculateDistancePoints.push([e.latlng.lat,e.latlng.lng])
+            
+            this.calculateDistanceLines.addLatLng(e.latlng)
+
+            this.calculateDistanceLinesLayer.addLayer(this.calculateDistanceLines);
+            this.calculateDistanceTempLinesLayer.addLayer(this.calculateDistanceTempLines);
+
+            this.map.addLayer(this.calculateDistanceTempLinesLayer);
+            this.map.addLayer(this.calculateDistanceLinesLayer);
+
+            if(this.calculateDistancePoints.length>1){
+                let lastLatLonArray = this.calculateDistancePoints[this.calculateDistancePoints.length-2];
+                var latlng = L.latLng(lastLatLonArray[0],lastLatLonArray[1]);
+                this.distanceValue = this.distanceValue +latlng.distanceTo(e.latlng);
+            }
+        },
+
+        onStopCJLDbClick(e){
+            if(this.map){
+                this.map.off('mousemove');
+                this.map.off('click');    //点击地图
+                this.map.off('dblclick');    //点击地图
+                
+                this.calculateDistancePopup = L.popup({
+                    closeButton:false,
+                    className:"_cljl",
+                    closeOnClick:false
+                })
+                .setLatLng(e.latlng)
+                .setContent("总距离:"+this.distanceValue.toFixed(3)+"(米)")
+                .openOn(this.map);
+            }
+        },
+
+        onCJLMove(e){
+            if(this.calculateDistancePoints.length>0) {
+                let ls =[this.calculateDistancePoints[this.calculateDistancePoints.length-1],[e.latlng.lat,e.latlng.lng]];
+                this.calculateDistanceTempLines.setLatLngs(ls);
+                this.map.addLayer(this.calculateDistanceTempLines);
+
+                let lastLatLonArray = this.calculateDistancePoints[this.calculateDistancePoints.length-1];
+                var latlng = L.latLng(lastLatLonArray[0],lastLatLonArray[1]);
+                let distanceValueTemp = this.distanceValue +latlng.distanceTo(e.latlng);
+            
+                this.calculateDistancePopup = L.popup({
+                    closeButton:false,
+                    className:"_cljl",
+                    closeOnClick:false
+                })
+                .setLatLng(e.latlng)
+                .setContent("总距离:"+distanceValueTemp.toFixed(3)+"(米)")
+                .openOn(this.map);
+            
+            }
+        },
+
+        markerPopuFun(feature,name,unit){
             let that = this;
-            let number = feature.properties.number;
-            let calc = feature.properties.calc;
-            let calcObj = feature.properties.calcObj;
-            let queryType = feature.properties.queryType;
-            let calcSL = feature.properties.calcSL;
+            let number = feature.number;
+            let calc = feature.calc;
+            let calcObj = feature.calcObj;
+            let queryType = feature.queryType;
+            let calcSL = feature.calcSL;
             let nowTime = new Date();
-            let startTimeStr = (nowTime.getFullYear()-1) + "-" + (nowTime.getMonth() + 1) + "-" + nowTime.getDate();
+            //let startTimeStr = (nowTime.getFullYear()-1) + "-" + (nowTime.getMonth() + 1) + "-" + nowTime.getDate();
+            let startTimeStr = dateUtils.dateToStr("yyyy-MM-dd",dateUtils.dateAdd("d", -365, nowTime));
             let endTimeStr = nowTime.getFullYear() + "-" + (nowTime.getMonth() + 1) + "-" + nowTime.getDate();
+
+
             
             let xAxisArray = [];
             let seriesArray = [];
@@ -798,11 +968,11 @@ export default {
                                 xAxisArray.push(timeStr);
                                 seriesArray.push(value.toFixed(3));
                             }  
-                            that.setChartData(feature,xAxisArray,seriesArray);
+                            that.setChartData(unit,name,xAxisArray,seriesArray);
                         }
                     },
                     errFun: err => {
-                        that.setChartData(feature,xAxisArray,seriesArray);
+                        that.setChartData(unit,name,xAxisArray,seriesArray);
                     }
                 });
             }else{
@@ -838,23 +1008,23 @@ export default {
                                 seriesArray.push(value.toFixed(3));
                             }
                             if(!calcSL){
-                                that.setChartData(feature,xAxisArray,seriesArray);
+                                that.setChartData(unit,name,xAxisArray,seriesArray);
                             }else{
-                                that.setChartSLData(feature,xAxisArray,seriesArray,seriesArraySL);
+                                that.setChartSLData(unit,name,xAxisArray,seriesArray,seriesArraySL);
                             }
                             
                         }
                     },
                     errFun: err => {
-                        that.setChartData(feature,xAxisArray,seriesArray);
+                        that.setChartData(unit,name,xAxisArray,seriesArray);
                     }
                 });
             }
         },
 
-        setChartData(feature,xAxisArray,seriesArray){
+        setChartData(unit,name,xAxisArray,seriesArray){
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('marker' + feature.properties.number));
+            var myChart = echarts.init(document.getElementById('markerPop_Panels'+name));
             // 指定图表的配置项和数据
             let option = {
                 tooltip: {
@@ -882,7 +1052,7 @@ export default {
                 }],
                 yAxis: {
                     type: 'value',
-                    name: '单位('+feature.properties.unit+')',
+                    name: '单位('+unit+')',
                     nameTextStyle:{
                         padding:[0, 0, -8, 0],
                         fontSize:10,
@@ -918,9 +1088,9 @@ export default {
             myChart.setOption(option);
         },
 
-        setChartSLData(feature,xAxisArray,seriesArray,seriesArraySL){
+        setChartSLData(unit,name,xAxisArray,seriesArray,seriesArraySL){
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('marker' + feature.properties.number));
+            var myChart = echarts.init(document.getElementById('markerPop_Panels'+name));
             // 指定图表的配置项和数据
             let option = {
                 color: ['#5793f3', '#d14a61'],
@@ -1159,7 +1329,6 @@ export default {
                 
             }
         },
-           
 
         /*
         * 返回数据库中的查询字段
@@ -1191,6 +1360,7 @@ export default {
             //that.addTips(area.toFixed(3));
             that.rectangleMeasure.layer.addTo(that.map);
         },
+
         mousedown(e){
             let that = this;
             that.rectangleMeasure.rectangle = null;
@@ -1198,6 +1368,7 @@ export default {
             that.rectangleMeasure.startPoint = e.latlng;
             that.map.on('mousemove',that.mousemove)
         },
+
         mousemove(e){
             let that = this;
 
@@ -1206,6 +1377,7 @@ export default {
             that.map.off('mousedown');
             that.map.on('mouseup', that.mouseup);
         },
+
         mouseup(e){    
             let that = this;
 
@@ -1284,6 +1456,7 @@ export default {
                 })   
             }
         },
+
         destory(){
             let that = this;
             if(that.rectangleMeasure.rectangle){

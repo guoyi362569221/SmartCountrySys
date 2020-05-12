@@ -109,14 +109,14 @@
 }
 
 .HomePageMonitor .popuCustomerPanel{
-    width: 300px; 
-    height: 200px;
+    width: 450px; 
+    height: 240px;
 }
 
 .HomePageMonitor .popuCustomerPanelTitle{
     width: 100%;
-    height: 25px;
-    line-height: 25px;
+    height: 35px;
+    line-height: 35px;
     background-color: rgb(49, 126, 236);
     color: #fff;
 
@@ -124,11 +124,37 @@
     text-indent: 5px;
 }
 
+.HomePageMonitor .popuCustomerPanelTab{
+    width: 70px;
+    height: calc(205px - 10px);
+    /*background-color: red;*/
+    padding: 5px 3px 5px 2px;
+    float:left;
+    background-color: rgb(0, 0, 0, 0.1);
+}
+
+.HomePageMonitor .popuCustomerPanelTab .popuCustomerPanelTabItem{
+     width: 100%;
+     height: 15;
+     line-height: 20px;
+     padding: 2px 0px;
+     background-color: rgb(49, 126, 236, 0.1);
+     border:1px solid #fff;
+     cursor: pointer;
+}
+
+.HomePageMonitor .popuCustomerPanelTab .popuCustomerPanelTabItemChecked{
+     background-color: rgb(49, 126, 236);
+     color: #fff !important;
+     cursor: pointer;
+}
+
 .HomePageMonitor .popuCustomerPanelContent{
-    width: 290px;
-    height: calc(175px - 10px);
+    width: 370px;
+    height: calc(205px - 10px);
     background-color: #fff;
-    padding: 5px 5px;
+    padding: 5px 5px 5px 0px;
+    float:left;
 }
 
 .hpManage_Content .el-tabs__item{
@@ -172,4 +198,12 @@
 
 .hpManage_Content .el-button--mini, .el-button--mini.is-round{
     padding: 4px 15px!important;
+}
+
+.calculateDistance .el-button--mini, .el-button--mini.is-round{
+    padding: 4px 8px!important;
+}
+
+._cljl .leaflet-popup-content{
+    width: 120px !important;
 }

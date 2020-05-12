@@ -264,6 +264,7 @@ export default {
          * 获取用户信息列表方法
          */
         getList() {
+            let that = this;
 
             this.$$getRoles({
                 data: {
@@ -293,9 +294,9 @@ export default {
                     arearCode: '*'
                 },
                 fn: data => {
-                    this.areaList = [];
+                    that.areaList = [];
                     if (this.config.isProvince.flag) {
-                        this.areaList.push({label: this.config.isProvince.name, value: this.config.isProvince.value})
+                        that.areaList.push({label: this.config.isProvince.name, value: this.config.isProvince.value})
                     }
 
                     let aList = data.map(item => {
@@ -304,10 +305,10 @@ export default {
                             value: item.areacode.toString()
                         }
                     });
-                    this.areaList = this.areaList.concat(aList);
+                    that.areaList = that.areaList.concat(aList);
 
                     if (!this.config.isProvince.flag) {
-                        this.areaList.forEach(area => {
+                        that.areaList.forEach(area => {
                             if (this.config.isProvince.areacode.toString() === area.value) {
                                 area.value = this.config.isProvince.value;
                             }
@@ -320,6 +321,7 @@ export default {
                             value: '*'
                         },
                         fn: res => {
+                            this.user_list = [];
                             if (this.config.sAdminId == this.$store.state.user.userinfo.info.org_id) {
                                 this.user_list = res;
                             } else {
@@ -328,7 +330,7 @@ export default {
                                         item.areacode == this.$store.state.user.userinfo.info.areacode;
                                 });
                             }
-
+                            debugger;
                             this.user_list.forEach(user => {
                                 let currUserInfo = this.areaList.filter(area => {
                                     return area.value == user.areacode;

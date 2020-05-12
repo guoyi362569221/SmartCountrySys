@@ -8,22 +8,27 @@ Vue.use(VueAxios, axios);
 
 Vue.use(Router);
 
-import {Content, Body, NotFound} from 'layout/';
+import {Home, Content, Body, NotFound} from 'layout/';
 
 const Login = () => import('components/login/login.vue');
-const Home = () => import('components/Home/Module.vue');
+const Index = () => import('components/Index/Module.vue');
 const List = () => import('components/Role/Module.vue');
 const userList = () => import('components/UserList/Module.vue');
 const Edit = () => import('components/UserEdit/Module.vue');
 const Org = () => import('components/OrgMng/Module.vue');
+
+const MonitorAnaysis = () => import('components/MonitorAnaysis/Module.vue');
+
 const routerCfg = {
+    'Home': Home,
     'Login': Login,
     'Body': Body,
-    'Home': Home,
+    'Index': Index,
     'List': List,
     'Org':Org,
     'userList': userList,
-    'Edit': Edit
+    'Edit': Edit,
+    'MonitorAnaysis':MonitorAnaysis
 };
 
 let env = process.env;

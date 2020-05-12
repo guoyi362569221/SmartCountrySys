@@ -23,7 +23,22 @@
         "path": "/",
         "name": "首页",
         "icon": "",
-        "component": "Home"
+        "component": "Index"
+      }
+    ]
+  },
+  {
+    "path": "/analysis",
+    "name": "统计分析",
+    "component": "Home",
+    "redirect": "/analysis/monitorAnaysis",
+    "icon": "fa fa-podcast",
+    "children": [
+      {
+        "path": "monitorAnaysis",
+        "name": "监测分析",
+        "icon": "fa fa-podcast",
+        "component": "MonitorAnaysis"
       }
     ]
   },
